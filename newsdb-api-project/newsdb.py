@@ -36,7 +36,7 @@ def get_authors():
     """Return all posts from the 'database'. Most recent first."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
-    c.execute("SELECT name, bio FROM authors")
+    c.execute("select authors.name, sum(views) from popular_articles right join authors on author=authors.id group by authors.name, author order by sum desc;")
     return c.fetchall()
     db.close()
 
@@ -44,7 +44,8 @@ def get_articles():
     """Return all posts from the 'database'. Most recent first."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
-    c.execute("SELECT author, title FROM articles")
+    c.execute("select concat('\"', a.title, '\" ', '--', count(substring(l.path, 10)), ' views') as most_popular_articles from log l right join articles a on a.slug=substring(l.path, 10) group by a.title order by count(substring(l.path, 10)) desc limit 3;")
+    '''c.execute("SELECT author, title FROM articles")'''
     return c.fetchall()
     db.close()
 
@@ -71,14 +72,35 @@ class NewsHandler(BaseHTTPRequestHandler):
 
     
         if (data == "?item=author"):
-            posts = "".join(POST % (name, bio) for name, bio in get_authors())
-            self.wfile.write("<h1>Most Popular Authors: </h1>".encode())
-            self.wfile.write(posts.encode()) 
+            '''posts = "".join(POST % (name, bio) for name, bio in get_authors())'''
+            posts = ''
+            self.wfile.write("<h1>Most Popular Authors: </h1>".encode()) 
+            print ('\nMost Popular Authors\n---------------------')
+            posts = "".join(POST % (name, views) for name, views in get_authors())
+            for name, views in get_authors():
+                output = "".join('"' + name + '" --' + str(views))
+                print ('%s' %output)
+            print('\n')
+            self.wfile.write(posts.encode())
 
         if (data == "?item=article"):
-            posts = "".join(POST % (author, title) for author, title in get_articles())
+            '''posts = "".join(POST % title for title in get_articles())'''
+            posts = ""
             self.wfile.write("<h1>Most Popular Articles: </h1>".encode())
-            self.wfile.write(posts.encode())   
+            print ('\nMost popular Articles')
+            print ('---------------------')
+            
+            for title in get_articles():
+                output = title
+                print ('%s' %output)
+                posts += '%s' %output
+                posts += "<br>"
+            
+            print('\n')
+            self.wfile.write(posts.encode())
+            
+            '''self.wfile.write("<h1>Most Popular Articles: </h1>".encode())
+            self.wfile.write(posts.encode())'''
 
         if (data == "?item=mostError"):
             posts = "".join(POST % (time, status) for time, status in get_mostError())

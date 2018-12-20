@@ -1,0 +1,71 @@
+Question 1: Most popular article
+
+select concat('"', a.title, '" --', count(substring(l.path, 10)), ' views') title from log l right join articles a on a.slug=substring(l.path, 10) group by a.title order by count(substring(l.path, 10)) desc limit 3;
+
+select concat('"', a.title, '" --', count(substring(l.path, 10)), ' views') as most_popular_articles from log l right join articles a on a.slug=substring(l.path, 10) group by a.title order by count(substring(l.path, 10)) desc limit 3;
+
+-------------------------------------------------------------------
+Question 2: Most popular aurthor
+
+create view popular_articles
+select author, title, count(*) as views
+from articles a, log l
+where a.slug=substring(l.path, 10)
+group by author, title
+order by views desc;
+
+
+
+select a.name, sum(views) 
+from popular_articles p 
+right join authors a 
+on author=a.id 
+group by a.name, 
+author order by sum desc;
+
+-----------------------------------------------------------------------
+Question 3: Most Error
+
+select count(status) from log where time::date = '2016-08-01' and status not ilike '200 ok';
+
+percentage 
+
+select 10000*count(status)/(select count(status) from log where time::date = '2016-07-01') from log where time::date = '2016-07-01'
+and status ilike '200 ok';
+
+---------------------------------------------------------------------------
+select date_trunc('day', time) as dte,
+       avg(case when status <> '200 OK' then 1.0 else 0 end) as daily_rate
+from log l
+group by dte;
+
+--------------------------------------------------------------------------
+select date_trunc('day', time) as dte,
+       avg( (status <> '200 OK')::int ) as daily_rate
+from log l
+
+----------------------------------------------------------------------------
+SELECT days, (ERROR*1.0/TOTAL)*100.0 Percentage FROM
+(select date_trunc('day',time) days,
+    COUNT(case when status = '404 NOT FOUND' 
+                   then 1 ELSE NULL END) ERROR,
+    COUNT(1) TOTAL
+from log
+group by date_trunc('day',time)) A;
+
+------------------------------------------------------------------------------
+
+select time::date as date,
+       avg( (status <> '200 OK')::int )*100 as views
+from log group by time::date order by views desc limit 1;
+
+
+-------------------------------------------------------------------------------
+
+select to_char(time::date, 'FMMonth FMDDth, YYYY') as output from log limit 3;
+
+--------------------------------------------------------------------------------
+
+select to_char(time::date, 'FMMonth DD, YYYY') as date,
+       avg( (status <> '200 OK')::int )*100 as views
+from log group by time::date order by views desc limit 1;
