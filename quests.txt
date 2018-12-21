@@ -69,3 +69,14 @@ select to_char(time::date, 'FMMonth FMDDth, YYYY') as output from log limit 3;
 select to_char(time::date, 'FMMonth DD, YYYY') as date,
        avg( (status <> '200 OK')::int )*100 as views
 from log group by time::date order by views desc limit 1;
+
+----------------------------------------------------------------------------------
+
+select to_char(time::date, 'FMMonth DD, YYYY') as date,
+       round(avg( (status <> '200 OK')::int )*100, 1) as views
+from log group by time::date order by views desc limit 1;
+
+----------------------------------------------------------------------------------
+
+select concat(to_char(time::date, 'FMMonth DD, YYYY'), ' --', round(avg( (status <> '200 OK')::int )*100, 1), '% errors') as Most_Errors
+from log l group by time::date order by avg( (status <> '200 OK')::int )*100 desc limit 1;

@@ -53,7 +53,7 @@ def get_mostError():
     """Return all posts from the 'database'. Most recent first."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
-    c.execute("select time, status from log where time<'2016-07-01 12:00:33+05'")
+    c.execute("select concat(to_char(time::date, 'FMMonth DD, YYYY'), ' --', round(avg( (status <> '200 OK')::int )*100, 1), '% errors') as Most_Errors from log l group by time::date order by avg( (status <> '200 OK')::int )*100 desc limit 1;")
     return c.fetchall()
     db.close()
 
@@ -103,9 +103,20 @@ class NewsHandler(BaseHTTPRequestHandler):
             self.wfile.write(posts.encode())'''
 
         if (data == "?item=mostError"):
-            posts = "".join(POST % (time, status) for time, status in get_mostError())
+            posts = ""
             self.wfile.write("<h1>Days when more than '1%' of requests lead to errors: </h1>".encode())
+            print ('\nMost Error')
+            print ('---------------------')
             self.wfile.write(posts.encode()) 
+
+            for time in get_mostError():
+                output = time
+                print ('%s' %output)
+                posts += '%s' %output
+                posts += "<br>"
+            
+            print('\n')
+            self.wfile.write(posts.encode())
                
 
 if __name__ == '__main__':
