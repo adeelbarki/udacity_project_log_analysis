@@ -59,6 +59,7 @@ Remember to commect to database
 `postgres=# \c news`
 
 ### Most popular three articles of all time?
+(consult 'Add view in Database': most_popular_articles)
 ```
 select concat('"', a.title, '" ', '--', 
     count(substring(l.path, 10)), ' views') as most_popular_articles
@@ -67,7 +68,7 @@ select concat('"', a.title, '" ', '--',
 ```
 
 ### Most popular article authors of all time?
-(consult 'Add view in Database')
+(consult 'Add view in Database': most_popular_articles)
 ```
 select authors.name, sum(views) from popular_articles
     right join authors on author=authors.id group by authors.name, 
@@ -81,4 +82,8 @@ select concat(to_char(time::date, 'FMMonth DD, YYYY'),
     as Most_Errors from log l group by time::date order by 
     avg( (status <> '200 OK')::int )*100 desc limit 1;
 ```
+## Code Style
 
+Code style is verified with pep8 code style.
+
+## 
