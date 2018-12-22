@@ -20,14 +20,14 @@ To run code succesfully make sure that the required newsdata.sql file is importe
 
 Before running the code make sure to add a specific view to database.
 
-'''
+```
 create view popular_articles
-select author, title, count(*) as views
-from articles a, log l
-where a.slug=substring(l.path, 10)
-group by author, title
-order by views desc;
-'''
+    select author, title, count(*) as views
+    from articles a, log l
+    where a.slug=substring(l.path, 10)
+    group by author, title
+    order by views desc;
+```
 ## Run the code
 
 To run application, enter command the following command
@@ -61,9 +61,9 @@ Remember to commect to database
 ### Most popular three articles of all time?
 ```
 select concat('"', a.title, '" ', '--', 
-count(substring(l.path, 10)), ' views') as most_popular_articles
-from log l right join articles a on a.slug=substring(l.path, 10)
-group by a.title order by count(substring(l.path, 10)) desc limit 3;
+    count(substring(l.path, 10)), ' views') as most_popular_articles
+    from log l right join articles a on a.slug=substring(l.path, 10)
+    group by a.title order by count(substring(l.path, 10)) desc limit 3;
 ```
 
 ### Most popular article authors of all time?
