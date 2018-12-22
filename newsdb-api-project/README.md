@@ -11,7 +11,7 @@ Three main tasks that are carried out in this project are
 
 ## Resources
 
-The project comtains three files _newsdb.py_, _output.txt_ and _README.md_. These files can be cloned from github [link]( https://github.com/adeelbarki/udacity_project_log_analysis.git).
+The project comtains three files _newsdb.py_, _output.txt_ and _README.md_. These files can be cloned from [github link]( https://github.com/adeelbarki/udacity_project_log_analysis.git).
 Make sure to `cd newsdb-api-project` to access all three files. 
 
 To run code succesfully make sure that the required newsdata.sql file is imported correctly in to the database. File can be obtained from udacity nanodegree course. 
@@ -30,24 +30,30 @@ create view popular_articles
 ```
 ## Run the code
 
-To run application, enter command the following command
+To run application, enter command the following command.
+
 `$ python newsdb.py`
+
 Open any internet browser like Chrome, Firefox or internet explorer and open URL
+
 `localhost:8000`. 
 
 Search tab gives the option to select from all the three tasks. Select one of the task and click the search button. 
 
 ## Results
 
-Results of these tasks can be seen on the browser and the terminal running the application at the same time. In order to save these results to output.txt type this command
+Results of these tasks can be seen on the browser and the terminal running the application at the same time. In order to save these results to output.txt type this command.
+
 `$ python newsdb.py > ouytput.txt`
 
 ## Simpler solution with printserver.py
 
-Github repo also contains a file named `printserver.py_`. This file is rather a simple file without an http web server. It only prints the required tasks on terminal by using this command.
+Github repo also contains a file named `printserver.py`. This file is rather a simple file without an http web server. It only prints the required tasks on terminal by using this command.
+
 `$ python printserver.py`
 
 In order to print this data in an output.txt file repeat previous command with printserver.py.
+
 `$ python printserver.py > output.txt`
 
 ## SQL Commands
