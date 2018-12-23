@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is designed for Udacity Full Stack Web Developer Nanodegree Program. Purpose of this project is to connect SQL database using python. The project is a reporting tool that contains three successful tasks handled in PostgreSQL and then printed out on console and browser at the same time. 
+This project is designed for Udacity Full Stack Web Developer Nanodegree Program. Purpose of this project is to connect SQL database using python. The project is a reporting tool that contains three successful tasks handled in PostgreSQL and then printed out on terminal and browser at the same time. 
 
 Three main tasks that are carried out in this project are
 * What are the most popular three articles of all time?
@@ -63,7 +63,7 @@ In order to print this data in an output.txt file repeat previous command with p
 
 SQL commands used for this projects are described. These commands can be used in postgreSQL terminal to see results separately.
 
-Remember to connect to database using this command. 
+Remember to connect database using this command. 
 
 `postgres=# \c news`
 
@@ -91,8 +91,12 @@ select concat(to_char(time::date, 'FMMonth DD, YYYY'),
     as Most_Errors from log l group by time::date order by 
     avg( (status <> '200 OK')::int )*100 desc limit 1;
 ```
+_(Quests.txt file is attached with this project folder, contains all SQL commands used in this project)._ 
+
 ## Code Style
 
 Code is verified with pep8 code style.
 
-## 
+## License
+
+Project Logs Analysis is a part of Full Stack Web Development Nanodegree Program at [Udactiy](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).  
