@@ -48,7 +48,7 @@ for title in get_articles():
 
 print('\nMost Popular Authors\n---------------------')
 for name, views in get_authors():
-    output = "".join('"' + name + '" --' + str(views))
+    output = "".join('"' + name + '" --' + str(views) + ' views')
     print('%s' % output)
 
 print('\nMore than 1% error on any day\n---------------------')

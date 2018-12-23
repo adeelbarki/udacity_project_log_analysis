@@ -81,7 +81,7 @@ class NewsHandler(BaseHTTPRequestHandler):
             self.wfile.write("<h1>Most Popular Authors: </h1>".encode())
             print('\nMost Popular Authors\n---------------------')
             for name, views in get_authors():
-                output = "".join('"' + name + '" --' + str(views))
+                output = "".join('"' + name + '" --' + str(views) + ' views')
                 print('%s' % output)
                 posts += '%s' % output
                 posts += "<br>"
