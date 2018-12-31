@@ -1,4 +1,4 @@
-# Project: Logs Analysis
+# Project: Logs Analysis (Version 1.0.1)
 
 ## Description
 
@@ -19,7 +19,7 @@ Make sure to `$ cd newsdb-api-project` in terminal to access all three files.
 
 To run code succesfully make sure that the required newsdata.sql file is imported correctly in to the database. (File can be obtained from udacity nanodegree course). The zip file can also be downloaded from this link:
 
-`https://drive.google.com/open?id=1j7nWvVownvt_1WRsfawtwfR-IUC6ILJd`
+[Google Drive Link:](https://drive.google.com/open?id=1j7nWvVownvt_1WRsfawtwfR-IUC6ILJd)
 
 ## Add Views in Database
 
@@ -102,3 +102,9 @@ Code is verified with pep8 code style.
 ## License
 
 Project Logs Analysis is a part of Full Stack Web Development Nanodegree Program at [Udactiy](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).  
+
+## Author
+
+Adeel Ahmed Khan (Adeel Barki)
+_Full Stack Web Developer_
+
