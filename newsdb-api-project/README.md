@@ -17,7 +17,9 @@ The project contains three files _newsdb.py_, _output.txt_ and _README.md_. Thes
 
 Make sure to `$ cd newsdb-api-project` in terminal to access all three files. 
 
-To run code succesfully make sure that the required newsdata.sql file is imported correctly in to the database. (File can be obtained from udacity nanodegree course) 
+To run code succesfully make sure that the required newsdata.sql file is imported correctly in to the database. (File can be obtained from udacity nanodegree course). The zip file can also be downloaded from this link:
+
+`https://drive.google.com/open?id=1j7nWvVownvt_1WRsfawtwfR-IUC6ILJd`
 
 ## Add Views in Database
 
